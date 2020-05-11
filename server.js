@@ -4,9 +4,21 @@ require('dotenv').config({ path: path.join(__dirname, './config') });
 
 var moscaSettings = {
   port: 1883,
+  secure : {
+    port: 8443,
+    keyPath: process.env.SECURE_KEY,
+    certPath: process.env.SECURE_CERT,
+  },
   http: {
     port: +process.env.MQTT_HTTP_PORT || 8080
-  }
+  },
+  https:{
+    secure : {
+    port:+process.env.MQTT_HTTPS_PORT || 4433,
+    keyPath: process.env.SECURE_KEY,
+    certPath: process.env.SECURE_CERT,
+    }  
+  } 
 };
 
 var server = new mosca.Server(moscaSettings);	//here we start mosca
